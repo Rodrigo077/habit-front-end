@@ -1,32 +1,62 @@
 <h2>Cadastro de usuário</h2>
 
-<form class="row g-3">
+<form class="row g-3" [formGroup]="form" (ngSubmit)="submit()"  >
   <div class="col-md-6">
-    <label for="inputEmail4" class="form-label">Email</label>
-    <input type="email" class="form-control" id="inputEmail4">
+    <label for="name" class="form-label">Nome</label>
+    <input type="name" class="form-control"
+            formControlName="name"
+            id="email">
+    <div *ngIf="f['name'].touched && f['name'].invalid" class="alert alert-danger">
+                <div *ngIf="f['name'].errors
+                && f['name'].errors['required']" >
+                O Campo Nome é obrigatório!
+              </div>
+    </div>
   </div>
+
   <div class="col-md-6">
-    <label for="inputPassword4" class="form-label">Senha</label>
-    <input type="password" class="form-control" id="inputPassword4">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control"
+            formControlName="email"
+            id="email">
+    <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
+                <div *ngIf="f['email'].errors
+                && f['email'].errors['required']" >
+                O Campo email é obrigatório!
+              </div>
+    </div>
   </div>
+
+  <div class="col-md-6">
+    <label for="password" class="form-label">Senha</label>
+    <input type="password" class="form-control" id="password"
+            formControlName="password">
+    <div *ngIf="f['password'].touched && f['password'].invalid" class="alert alert-danger" >
+        <div *ngIf="f['password'].errors
+              && f['password'].errors['required']" >
+              O Campo senha é obrigatório!
+        </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <label for="cep" class="form-label">CEP</label>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" id="cep"
+             formControlName="cep" value="" #cep>
+      <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="buscarCep(cep.value)" >Buscar</button>
+      <div *ngIf="f['cep']. touched && f['cep'].invalid" class="alert alert-danger" >
+          <div *ngIf="f['cep'].errors
+                && f['cep'].errors['required']" >
+                O Campo Cep é obrigatório!
+          </div>
+      </div>
+    </div>
+  </div>
+
   <div class="col-12">
-    <label for="inputAddress" class="form-label">Endereço</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-  </div>
-  <div class="col-md-6">
-    <label for="inputCity" class="form-label">Cidade</label>
-    <input type="text" class="form-control" id="inputCity">
-  </div>
-  <div class="col-md-4">
-    <label for="inputState" class="form-label">UF</label>
-    <select id="inputState" class="form-select">
-      <option selected>Selecionar...</option>
-      <option>...</option>
-    </select>
-  </div>
-  <div class="col-md-2">
-    <label for="inputZip" class="form-label">CEP</label>
-    <input type="text" class="form-control" id="inputZip">
+    <label for="endereco" class="form-label">Logradouro</label>
+    <input type="text" readonly class="form-control" formControlName="endereco" [(ngModel)]="endereco" value="" id="endereco">
   </div>
   <div class="col-12">
     <button type="submit" class="btn btn-primary">Cadastrar</button>
